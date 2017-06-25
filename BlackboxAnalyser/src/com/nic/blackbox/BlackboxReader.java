@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.nic.streamprocessor.StreamSource;
+import com.nic.streamprocessor.streamsources.FileStreamSource;
 
-public class BlackboxReader extends StreamSource
+public class BlackboxReader extends FileStreamSource
 {
 	protected int FRAME_TYPE_H	= 0;
 	protected int FRAME_TYPE_I	= 1;
@@ -22,7 +23,6 @@ public class BlackboxReader extends StreamSource
    	protected int FIELD_ENCODING_TAG8_4S16  = 8;
    	protected int FIELD_ENCODING_NULL = 9;// Nothing is written to the file, take value to be zero
     
-	protected FileInputStream fis;
 	protected byte peekedByte;
 	protected boolean hasPeeked;
 	protected long streamCounter;
@@ -35,7 +35,7 @@ public class BlackboxReader extends StreamSource
 	
 	public BlackboxReader(String fileName) throws FileNotFoundException
 	{
-		fis = new FileInputStream(fileName);
+		super(fileName);
 		streamCounter = 0;
 		hasPeeked = false;
 		timedelta = 0;
